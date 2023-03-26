@@ -9,7 +9,7 @@ interface issuedERC20 {
 }
 
 contract Factory is Ownable {
-    IERC20 constant FGT_TOKEN = IERC20(0x45A68E4952F1A2fAe4E10CDc45BF410C6e89bE4e);
+    IERC20 constant FGT = IERC20(0xe193AB2EE6b6E0ABE1C9818763d3070BAC96DFBC);
     IERC20 constant USDT = IERC20(0x36AA5e2fAfE33bF95344165fa0FCc33b9e8a4886);
     address[] public funds;
     uint interest;
@@ -22,7 +22,7 @@ contract Factory is Ownable {
         USDT.approve(address(f), OWNER_CONTRIBUTION);
         f.fund(owner, OWNER_CONTRIBUTION);
         funds.push(address(f));
-        issuedERC20(address(FGT_TOKEN)).issue(msg.sender, amount);
+        issuedERC20(address(FGT)).issue(msg.sender, OWNER_CONTRIBUTION);
     }
 
     function fund(uint256 _fund, uint256 amount) public {
@@ -30,6 +30,6 @@ contract Factory is Ownable {
         amount = amount - amount * interest / DENOMINATOR;
         USDT.approve(address(funds[_fund]), amount);
         Fund(funds[_fund]).fund(msg.sender, amount);
-        issuedERC20(address(FGT_TOKEN)).issue(msg.sender, amount);
+        issuedERC20(address(FGT)).issue(msg.sender, amount);
     }
 }

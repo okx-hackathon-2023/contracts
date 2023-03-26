@@ -7,6 +7,9 @@ contract FGT is ERC20, Ownable {
     address public factory;
 
     constructor() ERC20("FGT", "FGT") {}
+    function decimals() public override view returns (uint8) {
+        return 6;
+    }
 
     function setFactory(address _factory) public onlyOwner {
         factory = _factory;

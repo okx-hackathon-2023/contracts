@@ -32,6 +32,9 @@ contract Fund is ERC20 {
         owner = _owner;
         CrowdLoanLock = block.number + LOCK_DURATION;
     }
+    function decimals() public override view returns (uint8) {
+        return 6;
+    }
 
     modifier onlyOwner() {
         require(owner == msg.sender);
